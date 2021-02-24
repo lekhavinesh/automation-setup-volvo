@@ -1,2 +1,2 @@
 # automation-setup-volvo
-Test repo for Automation assignment
+Test repo for Automation assignment demonstration
