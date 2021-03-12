@@ -9,8 +9,9 @@
   "author": "Lekha",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.3.0",
     "@wdio/cli": "^7.0.7",
+    "chai": "^4.3.0",
+    "node-resemble-js": "^0.2.0",
     "wdio-junit-to-html": "^3.1.2"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "chromedriver": "^88.0.0",
     "cucumber": "^7.0.0-rc.0",
     "wdio-chromedriver-service": "^7.0.0",
+    "wdio-docker-service": "^3.1.0",
     "webdriverio": "^7.0.7"
   }
 }

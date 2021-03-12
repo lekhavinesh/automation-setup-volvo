@@ -113,31 +113,14 @@ Then(/^the first model should again be displayed$/, () => {
     CampaignPage.modelExplore()
 });
 
+When(/^the user clicks on the watch the story$/, () => {
+    CampaignPage.playVideo()
+});
 
 
-
-
-
-
-
-
-
-// Then(/^user should be able to view the campaign page$/, async () => {
-//     CampaignPage.homePage()
-// });
-
-// Then(/^the header section should display (.*)$/, (expectedheader) => {
-//     LoginPage.homePageHeader(expectedheader)
-// });
-
-// Then(/^the footer section should display(.*)$/, (expectedfooter) => {
-//     LoginPage.homePageFooter(expectedfooter)
-// });
-
-// When(/^I click on the Car option$)
-// {
-//         LoginPage.models()
-//     }
+Then(/^the frame should get maximised and videoshould get played$/, () => {
+    CampaignPage.verifyVideoIsPlaying()
+});
 
 
 

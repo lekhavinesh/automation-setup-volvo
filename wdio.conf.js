@@ -6,18 +6,25 @@ exports.config = {
     // Runner Configuration
     // ====================
     runner: 'local',
+
+    // ...
+    services: ['docker'],
+    // ...
+
     //
     // ==================
     // Specify Test Files
     // ==================
 
     specs: [
-        './features/cookiepop.feature',
-        './features/cookiesettings.feature',
-        './features/hamburger.feature',
-        './features/home.feature',
-        './features/modelcolor.feature',
-        './features/models.feature',
+        // './features/cookiepop.feature',
+        // './features/cookiesettings.feature',
+        // './features/hamburger.feature',
+        // './features/home.feature',
+        // './features/modelcolor.feature',
+        // './features/models.feature',
+        './features/video.feature',
+
     ],
     // Patterns to exclude.
     exclude: [

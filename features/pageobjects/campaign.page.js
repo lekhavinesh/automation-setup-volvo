@@ -2,6 +2,8 @@ const { assert } = require('console');
 const { first } = require('lodash');
 const Page = require('./page');
 const chaiExpect = require('chai').expect
+const resemble = require('node-resemble-js')
+const fs = require('fs');
 
 class LoginPage extends Page {
 
@@ -132,8 +134,6 @@ class LoginPage extends Page {
     hoverFirstElement() {
         const firstHeader = $("span[data-autoid='productListCarouselItem:modelName']")
         const color = firstHeader.getCSSProperty('color')
-        console.log('\n\n\n\n\n\n\n')
-        console.log('--------------------------------------color 1 ', color['value'])
         const modelExplore = $("a[data-autoid='productListCarouselItem-0']")
         modelExplore.moveTo();
 
@@ -143,27 +143,67 @@ class LoginPage extends Page {
 
         const firstHeader = $("span[data-autoid='productListCarouselItem:modelName']")
         const color = firstHeader.getCSSProperty('color')
-
-        console.log('\n\n\n\n\n\n\n')
-        console.log('------------------------------------------------color 2 ', color['value'])
-
         chaiExpect(color['value']).to.equal('rgba(28,107,186,1)')
-
 
     }
 
-    // verifyUserStory() {
-    //     const document = $('.video')
-    //     // expect(document).toBePresent()
-    //     //  document.click()
-    //     var myVideo = document.getElementById("video1");
-    //     if (document.paused) {
-    //         document.play();
-    //     }
-    //     else {
-    //         document.pause();
-    //     }
-    // }
+    playVideo() {
+        // const checkVideo = $("(//video[@controlslist='nodownload'])")
+        const checkVideo = $("(//button[.='watch the story'])")
+        //button[.='watch the story']
+        checkVideo.click()
+    }
+
+    compareImages(image1, image2, percentage) {
+        return new Promise(function (resolve, reject) {
+            resemble(image1)
+                .compareTo(image2)
+                .onComplete(function (data) {
+                    data.getDiffImage().pack()
+                        .pipe(fs.createWriteStream('./reports/' + Date.now()))
+                    if (data.misMatchPercentage > percentage) {
+                        resolve(true)
+                    } else {
+                        reject()
+                    }
+                })
+        })
+    }
+
+    test() {
+        return console.log('-----------------------------------test print')
+    }
+    verifyVideoIsPlaying() {
+        let screen1 = browser.saveScreenshot('./screenshot/1.png')
+        browser.pause(5000)
+        let screen2 = browser.saveScreenshot('./screenshot/2.png')
+        console.log('-----------------------------------Screenshot completed')
+        var isVideoPlayed = browser.call(() => {
+            return new Promise(function (resolve, reject) {
+                resemble(screen1)
+                    .compareTo(screen2)
+                    .onComplete(function (data) {
+                        data.getDiffImage().pack()
+                            .pipe(fs.createWriteStream('./reports/' + Date.now()))
+                        if (data.misMatchPercentage > 0.1) {
+                            resolve(true)
+                        } else {
+                            reject()
+                        }
+                    })
+            })
+        });
+        console.log('-----------------------------------screen1 ', screen1)
+        console.log('-----------------------------------screen1 ', isVideoPlayed)
+
+        console.log('------------------------------------------------Complete Comparison ')
+        chaiExpect(isVideoPlayed).to.true
+    }
+
+
+
+
+
 
 
 }
