@@ -79,7 +79,7 @@ class LoginPage extends Page {
     }
 
     verifyHambugerMenu() {
-        const hamburgerMenu = $("a[data-autoid='nav:sideNavLinksMenuItem']")
+           const hamburgerMenu = $("button[data-autoid='nav:sideNavLinksMenuDrawer']")
         expect(hamburgerMenu).toBeClickable()
     }
     y
@@ -93,7 +93,7 @@ class LoginPage extends Page {
     }
 
     hamburgerClose() {
-        const closeButton = $("(//button[@data-autoid='nav:siteNavCloseIcon'])[2]")
+        const closeButton = $("(//button[@data-autoid='nav:siteNavCloseIcon'])")
         closeButton.click()
     }
 
@@ -148,9 +148,7 @@ class LoginPage extends Page {
     }
 
     playVideo() {
-        // const checkVideo = $("(//video[@controlslist='nodownload'])")
         const checkVideo = $("(//button[.='watch the story'])")
-        //button[.='watch the story']
         checkVideo.click()
     }
 
@@ -170,9 +168,6 @@ class LoginPage extends Page {
         })
     }
 
-    test() {
-        return console.log('-----------------------------------test print')
-    }
     verifyVideoIsPlaying() {
         let screen1 = browser.saveScreenshot('./screenshot/1.png')
         browser.pause(5000)
@@ -193,19 +188,9 @@ class LoginPage extends Page {
                     })
             })
         });
-        console.log('-----------------------------------screen1 ', screen1)
-        console.log('-----------------------------------screen1 ', isVideoPlayed)
-
         console.log('------------------------------------------------Complete Comparison ')
         chaiExpect(isVideoPlayed).to.true
     }
-
-
-
-
-
-
-
 }
 
 module.exports = new LoginPage();

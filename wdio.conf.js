@@ -8,7 +8,18 @@ exports.config = {
     runner: 'local',
 
     // ...
-    services: ['docker'],
+    services:
+    // [
+   // ['chromedriver',{
+   // 	logFileName: 'wdio-chromedriver.log',
+    //	outputDir: 'driver-logs',
+    	//args: ['--silent']
+    //	}]
+    	
+         
+    ['docker'],
+   // ],
+    
     // ...
 
     //
@@ -17,12 +28,12 @@ exports.config = {
     // ==================
 
     specs: [
-        // './features/cookiepop.feature',
-        // './features/cookiesettings.feature',
-        // './features/hamburger.feature',
-        // './features/home.feature',
-        // './features/modelcolor.feature',
-        // './features/models.feature',
+        './features/cookiepop.feature',
+         './features/cookiesettings.feature',
+        './features/hamburger.feature',
+        './features/home.feature',
+         './features/modelcolor.feature',
+        './features/models.feature',
         './features/video.feature',
 
     ],
@@ -40,6 +51,17 @@ exports.config = {
         maxInstances: 10,
         browserName: 'chrome',
         acceptInsecureCerts: true,
+        
+        'goog:chromeOptions': {
+        	args: [
+        	'--no-sandbox',
+        	'--disable-infobars',
+        	'--headless',
+        	'--disable-gpu',
+        	'--window-size=1440,735',
+        	'--disable-dev-shm-usage'
+        	],
+        	}
     }],
     // ===================
     // Test Configurations
@@ -61,7 +83,7 @@ exports.config = {
 
         [HtmlReporter, {
             debug: true,
-            outputDir: './reports/html-reports/',
+            outputDir: './Reports/html-reports/',
             filename: 'report.html',
             reportTitle: 'Test Report Title',
             showInBrowser: true,
@@ -72,7 +94,7 @@ exports.config = {
     ],
     onPrepare: function (config, capabilities) {
         let reportAggregator = new ReportAggregator({
-            outputDir: './reports/html-reports/',
+            outputDir: './Reports/html-reports/',
             filename: 'master-report.html',
             reportTitle: 'Master Report',
             browserName: capabilities.browserName,

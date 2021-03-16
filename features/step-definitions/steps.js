@@ -72,7 +72,7 @@ When(/^the user click on the first menu$/, () => {
 });
 
 Then(/^the submenu section should be displayed$/, () => {
-    CampaignPage.clickOnFirstMenu()
+    CampaignPage.verifySubMenu()
 });
 
 When(/^the user clicks on the close button$/, () => {
