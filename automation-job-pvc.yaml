@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: reports
+  labels:
+    app: automation
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: automation
+spec:
+  template:
+    spec:
+      containers:
+      - name: automation
+        image: lekhavinesh/volvoautomation:latest
+        volumeMounts:
+        - name: reports
+          mountPath: /app/Reports/html-reports
+      volumes:
+      - name: reports
+        persistentVolumeClaim:
+          claimName: reports	
+      restartPolicy: Never
+  backoffLimit: 2
